@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 01 mai 2018 à 14:30
+-- Généré le :  mer. 02 mai 2018 à 08:56
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `album` (
 DROP TABLE IF EXISTS `ami`;
 CREATE TABLE IF NOT EXISTS `ami` (
   `id_ami` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo1` varchar(50) NOT NULL,
-  `pseudo2` varchar(50) NOT NULL,
+  `pseudo1` varchar(50) DEFAULT NULL,
+  `pseudo2` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_ami`),
   KEY `pseudo1` (`pseudo1`),
   KEY `pseudo2` (`pseudo2`)
@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `ami` (
 DROP TABLE IF EXISTS `commentaire_photo`;
 CREATE TABLE IF NOT EXISTS `commentaire_photo` (
   `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(50) NOT NULL,
-  `id_photo` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `id_photo` int(11) DEFAULT NULL,
   `commentaire` tinytext NOT NULL,
   PRIMARY KEY (`id_commentaire`),
   KEY `id_photo` (`id_photo`),
@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `commentaire_photo` (
 DROP TABLE IF EXISTS `commentaire_publication`;
 CREATE TABLE IF NOT EXISTS `commentaire_publication` (
   `id_commentairepub` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(50) NOT NULL,
-  `id_publication` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `id_publication` int(11) DEFAULT NULL,
   `commentairepub` tinytext NOT NULL,
   PRIMARY KEY (`id_commentairepub`),
   KEY `id_publication` (`id_publication`),
@@ -137,8 +137,8 @@ CREATE TABLE IF NOT EXISTS `evenenement` (
 
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
-  `id_evenement` int(11) NOT NULL,
-  `pseudo` varchar(50) NOT NULL,
+  `id_evenement` int(11) DEFAULT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
   KEY `id_evenement` (`id_evenement`),
   KEY `pseudo` (`pseudo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -195,8 +195,8 @@ CREATE TABLE IF NOT EXISTS `interet` (
 DROP TABLE IF EXISTS `like_photo`;
 CREATE TABLE IF NOT EXISTS `like_photo` (
   `id_like` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(50) NOT NULL,
-  `id_photo` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `id_photo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_like`),
   KEY `pseudo` (`pseudo`),
   KEY `id_photo` (`id_photo`)
@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `like_photo` (
 DROP TABLE IF EXISTS `like_publication`;
 CREATE TABLE IF NOT EXISTS `like_publication` (
   `id_likePub` int(11) NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(50) NOT NULL,
-  `id_publication` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `id_publication` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_likePub`),
   KEY `pseudo` (`pseudo`),
   KEY `id_publication` (`id_publication`)
@@ -227,8 +227,8 @@ CREATE TABLE IF NOT EXISTS `like_publication` (
 DROP TABLE IF EXISTS `messagerie`;
 CREATE TABLE IF NOT EXISTS `messagerie` (
   `id_message` int(11) NOT NULL AUTO_INCREMENT,
-  `expediteur` varchar(50) NOT NULL,
-  `destinataire` varchar(50) NOT NULL,
+  `expediteur` varchar(50) DEFAULT NULL,
+  `destinataire` varchar(50) DEFAULT NULL,
   `message` tinytext NOT NULL,
   PRIMARY KEY (`id_message`),
   KEY `destinataire` (`destinataire`),
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `photo` (
   `heure` time NOT NULL,
   `lieu` varchar(50) NOT NULL,
   `confidentialite` varchar(50) NOT NULL,
-  `id_album` int(11) NOT NULL,
+  `id_album` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_photo`),
   KEY `id_album` (`id_album`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -261,8 +261,8 @@ CREATE TABLE IF NOT EXISTS `photo` (
 
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
-  `id_publication` int(11) NOT NULL,
-  `pseudo` varchar(50) NOT NULL,
+  `id_publication` int(11) DEFAULT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
   KEY `Id_publication` (`id_publication`),
   KEY `pseudo` (`pseudo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -275,8 +275,8 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 DROP TABLE IF EXISTS `postulant`;
 CREATE TABLE IF NOT EXISTS `postulant` (
-  `pseudo` varchar(50) NOT NULL,
-  `id_offre` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `id_offre` int(11) DEFAULT NULL,
   KEY `pseudo` (`pseudo`),
   KEY `id_offre` (`id_offre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -289,9 +289,9 @@ CREATE TABLE IF NOT EXISTS `postulant` (
 
 DROP TABLE IF EXISTS `profil`;
 CREATE TABLE IF NOT EXISTS `profil` (
-  `id_photo` int(11) NOT NULL,
-  `pseudo` varchar(50) NOT NULL,
-  `type` varchar(2) NOT NULL,
+  `id_photo` int(11) DEFAULT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `type` varchar(2) DEFAULT NULL,
   KEY `id_photo` (`id_photo`),
   KEY `pseudo` (`pseudo`),
   KEY `type` (`type`)
@@ -324,7 +324,14 @@ CREATE TABLE IF NOT EXISTS `statut` (
   `id_statut` int(11) NOT NULL AUTO_INCREMENT,
   `nom_statut` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id_statut`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `statut`
+--
+
+INSERT INTO `statut` (`id_statut`, `nom_statut`) VALUES
+(1, 'Administrateur');
 
 -- --------------------------------------------------------
 
@@ -348,19 +355,19 @@ CREATE TABLE IF NOT EXISTS `type_photo` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `pseudo` varchar(50) NOT NULL,
-  `nom` varchar(50) DEFAULT NULL,
-  `prenom` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `mdp` varchar(50) DEFAULT NULL,
-  `date_naissance` date DEFAULT NULL,
-  `tel` int(8) DEFAULT NULL,
-  `sexe` char(1) DEFAULT NULL,
-  `statut_pro` varchar(50) DEFAULT NULL,
-  `id_statut` int(255) NOT NULL,
-  `id_formation` int(255) NOT NULL,
-  `id_experience` int(255) NOT NULL,
-  `id_interet` int(255) NOT NULL,
-  `id_competence` int(255) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mdp` varchar(50) NOT NULL,
+  `date_naissance` date NOT NULL,
+  `tel` int(8) NOT NULL,
+  `sexe` char(1) NOT NULL,
+  `statut_pro` varchar(50) NOT NULL,
+  `id_statut` int(255) DEFAULT NULL,
+  `id_formation` int(255) DEFAULT NULL,
+  `id_experience` int(255) DEFAULT NULL,
+  `id_interet` int(255) DEFAULT NULL,
+  `id_competence` int(255) DEFAULT NULL,
   PRIMARY KEY (`pseudo`),
   KEY `id_formation` (`id_formation`),
   KEY `id_experience` (`id_experience`),
@@ -368,6 +375,13 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   KEY `id_competence` (`id_competence`),
   KEY `id_statut` (`id_statut`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`) VALUES
+('sou97', 'maherzi', 'soufia', 'smaherzi@yahoo.fr', 'sou', '1997-03-10', 640464483, 'F', 'etudiant', 1, NULL, NULL, NULL, NULL);
 
 --
 -- Contraintes pour les tables déchargées
