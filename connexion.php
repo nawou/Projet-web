@@ -1,5 +1,5 @@
 <?php
-//on recupere les donnee saisie par l'utilisateur
+//on recupere les donnee saisies par l'utilisateur
 
 	$identifiant = isset($_POST["identifiant"])? $_POST["identifiant"]: ""; ;
 	$password = isset($_POST["password"])? $_POST["password"]: ""; ;
@@ -31,12 +31,12 @@ define('DB_PASS', '');
  
  // On verifie les champs rentre
  
- if ($identifiant!="") // Si les champ identifiant n'est pas vide
+ if ($identifiant!="") // Si le champ identifiant n'est pas vide
  {
 	$sql_id.= "WHERE pseudo LIKE '%id%'";
  
 
-	if ($password!="") // Si le champs mdp n'est pas vide
+	if ($password!="") // Si le champ mdp n'est pas vide
 	{
 		$sql_id.= "WHERE mdp LIKE '%password%'";
 	} //fin if
@@ -59,7 +59,7 @@ define('DB_PASS', '');
  
  else 
  {
-	echo "impossible de se connecter a la base de donnée";
+	echo "impossible de se connecter a la base de données";
 	exit;
 } 
  
