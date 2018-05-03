@@ -1,6 +1,6 @@
 <!-- Fichier html --> 
 <html> 
-<title>TRACK</title>
+<title>ECE TRACK</title>
 <meta charset="utf-8">
 
 <!-- On utilise le ichier css s'appelant style.css --> 
@@ -13,30 +13,33 @@
 
 <div class="header">
 <!-- Logo du site dans la barre de connexion --> 
-
-<div id="logo" class="header"><img src="track.png"/></div>
+<div id="img" class="header"><img src="logo.png"/></div>
 
 <!-- Formulaire de connexion --> 
+<form method="post" action="connexion.php">
 <div id="form1" class="header"> Email ou pseudo<br>
-	<input placeholder="email ou pseudo" type="mail" name="name" /><br>
-</div>
-<div id="form2" class="header">Mot de passe<br>
-	<input placeholder="mot de passe" type="password" name="password"/<br>
-</div>
+	<input placeholder="email ou pseudo" type="mail" name="identifiant" /><br>
 </div>
 
+<div id="form2" class="header">Mot de passe<br>
+	<input placeholder="mot de passe" type="password" name="password"/><br>
+</div>
 <!-- Bouton connexion --> 
 <input type="submit" class="bouton1" value="Connexion"/>
+</form>
+</div>
+
 
 <!-- Dans le corps principal de la page, texte de présentation et formulaire pour créer un compte --> 
 <div class="body">
- <div id="mess1" class="body"> TRACK ou votre réseau<br>
+ <div id="mess1" class="body"> ECE track ou votre réseau<br>
  	social professionnel </div>
 <div id="mess2" class="body"> Créer un compte</div>
 <div id="img2" class="body"><img src="ece1.png"/></div>
 <div id="img3" class="body"><img src="ece2.png"/></div>
 
 <!-- Formulaire pour créer un compte -->
+<form method="post" action=>
 <div id="form3" class="body">
 <input placeholder="Pseudo" type="text" id="namebox" /><br>
 <input placeholder="Prénom" type="text" id="namebox" name="name1" />
@@ -49,6 +52,7 @@
 <input type="submit" class="bouton2" value="Inscription"/>
 
 </div>
+</form>
 
 
 <!-- Barre en bas de la page --> 
@@ -59,5 +63,11 @@
 
 </div>
 </body>
+
+<!-- fonction de connexion -->
+
+
+
+
 </html>
 
