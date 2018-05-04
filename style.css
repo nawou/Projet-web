@@ -1,4 +1,4 @@
-body{ background: linear-gradient(to bottom right, white, #bcbdc4);
+﻿body{ background: linear-gradient(to bottom right, white, #bcbdc4);
 height: 700px;}
 
 /* Barre du haut avec ombre */ 
@@ -188,4 +188,3 @@ width:100%;
 background:#B22222;
 z-index:7;
 }
-
