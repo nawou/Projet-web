@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 04 mai 2018 à 13:07
+-- Généré le :  ven. 04 mai 2018 à 16:13
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -111,16 +111,17 @@ CREATE TABLE IF NOT EXISTS `emploi` (
   `description` text NOT NULL,
   `id_offre` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_offre`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `emploi`
 --
 
 INSERT INTO `emploi` (`titre`, `compagnie`, `description`, `id_offre`) VALUES
-('Ingénieur R&D', 'THALES', 'Rejoignez Thales, leader mondial des technologies de sûreté et de sécurité pour les marchés de l’Aérospatial, du Transport, de la Défense et de la Sécurité. Le Groupe bénéficie d’une implantation internationale qui lui permet d’agir au plus près de ses clients, partout dans le monde.Le Centre de Compétences HTE recherche un/une : \r\nIngénieur débutant - R&D (H/F). Basé(e) à Gennevilliers (92)\r\n\r\nAppelez le 0650565593', 1),
-('Ingénieur Intelligence Artificielle', 'Orange', 'Vous intégrez une équipe dédiée à l‘anticipation et la stratégie dans laquelle vous participez au développement de solutions d\'intelligence artificielle afin de prédire les actions de maintenance proactive, à réaliser avant l\'arrivée des incidents, et d\'améliorer l\'analyse et détection des causes racines des pannes \r\nAppelez le 0650336754', 2),
-('Ingénieur logiciels embarqués', 'Parrot Drones', 'Les projets de Parrot sont innovants, très techniques, difficiles à réaliser et en un temps record. C\'est ça la beauté d\'un esprit startup ! Nous avons l\'ambition, vous n\'avez pas froid aux yeux, rejoignez-nous ! \r\nAu sein de la filiale Parrot drone, située dans le 10e arrondissement de Paris, vous serez intégré à l\'équipe « Drones core products enos en tant qu\'Ingénieur logiciel embarqué. \r\nL\'équipe firmware core products a pour responsabilité le développement du firmware embarqué dans les produits Parrot des gamme Bebop, Disco et Sequoia, ainsi que des nouveaux produits basés sur les mêmes hardware. \r\n            Appelez le 0640460000', 3);
+('Ingenieur R&D', 'THALES', 'Rejoignez le Centre de Competences HTE recherche de Thales, leader mondial des technologies de surete et de securite pour les marches de l\'Aerospatial, du Transport, de la Defense et de la Securite. \r\nBase(e) a Gennevilliers (92)\r\nAppelez le 0650565593 si cette offre vous interesse.', 1),
+('Ingenieur Intelligence Artificielle', 'Orange', 'Vous integrez une equipe dediee a l\'anticipation et la strategie afin de participer au developpement de solutions d\'intelligence artificielle et d\'ameliorer l\'analyse et detection des causes racines des pannes \r\nAppelez le 0650336754 si cette offre vous interresse.', 2),
+('Ingenieur logiciels embarques', 'Parrot Drones', 'Au sein de la filiale Parrot drone, situee dans le 10e arrondissement de Paris, vous serez integre a l\'equipe  Drones core products enos en tant qu\'Ingenieur logiciel embarque. \r\nL\'equipe firmware core products a pour responsabilite le developpement du firmware embarque dans les produits Parrot. \r\nAppelez le 0640460000 si cette offre vous interresse.', 3),
+('Ingenieur en Systemes Embarques', 'Safran', 'Vos missions seront de :\r\nRediger les specifications logicielles et les specifications detaillees du logiciel ;\r\nContribuer au developpement du logiciel : modelisation, codage, debug et test ;\r\nSuivre les livraisons des sous-traitants : suivi de l\'avancement et verification des travaux rendus.\r\nAppelez le 0650565593 si cette offre vous interesse.', 4);
 
 -- --------------------------------------------------------
 

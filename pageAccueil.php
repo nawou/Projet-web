@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Accueil</title>
+  <title>TRACK</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,6 +11,11 @@
   <head><link type="text/css" rel="stylesheet" href="stylePageAccueil.css" />
  </head>
 </head>
+<?php  
+  session_start();
+  $pseudo = $_SESSION['user'];
+  $mdp= $_SESSION['mdp'];
+?>
 <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -39,25 +44,43 @@
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li class="active"><a href="#">Accueil</a></li>
         <li><a href="#">Mon réseau</a></li>
-        <li><a href="#">Emplois</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
         <li><a href="#">Vous</a></li>
-         <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
-        
-       
+      
       </ul>
       
     </div>
   </div>
 </nav>
-  
+ 
 <div class="container text-center">    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <p> Nawel Lalioui </p>
-        <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        <p> <?php
+//identifier le nom de base de données
+$db_handle = mysqli_connect("localhost","root", "");
+$db_found = mysqli_select_db($db_handle, "track");
+ 
+ //si le BDD existe, faire le traitement
+ if ($db_found) {
+ $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
+ $result = mysqli_query($db_handle, $sql);
+ while ($data = mysqli_fetch_assoc($result)) {
+ echo $data['prenom'] . " ". $data['nom'];
+ }//end while 
+ }//end if
+
+//si le BDD n'existe pas
+ else {
+ echo "Database not found";
+ }//end else
+//fermer la connection
+mysqli_close($db_handle);
+?> </p>
+        <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
       </div>  
     </div>
 
