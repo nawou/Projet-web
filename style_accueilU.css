@@ -1,0 +1,88 @@
+body{ background: linear-gradient(to bottom right, white, #bcbdc4);
+height: 700px;}
+
+/* Barre du haut avec ombre */ 
+.headerb{
+position:fixed;
+width:100%;
+height:100px;
+top:0;
+left:0;
+color:white;
+z-index:7;
+font-family:verdana;
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+}
+
+
+/* Pour le style de la barre */
+#myNavbar{
+position:fixed;
+width:100%;
+height:100px;
+background:#B22222;
+top:0;
+left:0;
+color:white; /* Couleur de la police du header */
+font-size:15px;
+z-index:7;
+font-family:verdana;
+}
+
+/* Style de la cible et position */
+#img{
+left:80px;
+height:50px;
+width:110px;
+top:20px;
+}
+
+/* Style du logo et position */
+#logo{
+left:100px;
+height:50px;
+width:110px;
+top:25px;
+}
+
+/* Style du logo et position */
+#search{
+left: 200px;
+height:50px;
+width:110px;
+top:25px;
+}
+
+
+
+/* Style du corps principal de la page */
+.body{
+position:absolute;
+left:0;
+top:100px;
+width:100%;
+height:700px;
+background:white;
+}
+
+
+#footer{
+margin-top:40px;
+margin-left:10px;
+font-size:14px;
+
+}
+
+/* Style de la barre du bas */
+#barre2{
+top:700px;
+left:0;
+font-family:verdana;
+font-size:20px;
+color:white;
+height:100px;
+width:100%;
+background:#B22222;
+z-index:7;
+}
+
