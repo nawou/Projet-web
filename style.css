@@ -1,4 +1,4 @@
-body{ background: linear-gradient(to bottom right, white, #bcbdc4);
+﻿body{ background: linear-gradient(to bottom right, white, #bcbdc4);
 height: 700px;}
 
 /* Barre du haut avec ombre */ 
@@ -116,7 +116,10 @@ color:#800000;
 height:60px;
 width:500px;
 }
-
+.pls{
+font-size: 60px;
+color:black;
+}
 /* Style du formulaire 3 (pour créer un compte) */
 #form3{
 top:100px;
@@ -184,4 +187,3 @@ width:100%;
 background:#B22222;
 z-index:7;
 }
-
