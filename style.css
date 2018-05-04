@@ -130,7 +130,7 @@ background:#D3D3D3;
 text-align: center;
 }
 
-#namebox{
+.namebox{
 margin-top:18px; /* espacement */
 left:290px;
 top:100px;
