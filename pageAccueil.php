@@ -38,12 +38,34 @@
       <ul class="nav navbar-nav">
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li class="active"><a href="#">Accueil</a></li>
-        <li><a href="#">Mon réseau</a></li>
-        <li><a href="#">Emplois</a></li>
+        <li><a href="reseau.php">Mon réseau</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
         <li><a href="#">Vous</a></li>
-         <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
+         <li><a href="page1test.php"><button type="submit" class="btn btn-default btn-sm" name= "deco" value="deconnexion"> Déconnexion </button> </a><li>
+		 
+		 <?php
+		 
+		/* if(isset($_POST['deco']) AND $_POST['deco']=='deconnexion')
+		 {
+			 echo 'je suis dedans";
+			 
+			 fermer la connection
+				mysqli_close($db_handle); 
+				
+			 header('Location: page1test.php');
+			 
+			 
+			 
+		 }*/
+		 
+		 
+		 
+		 
+		 
+		 
+		 ?>
         
        
       </ul>
@@ -60,14 +82,14 @@
         <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
       </div>  
     </div>
-
-
-    <div class="col-sm-9">
+	
+	<div class="col-sm-9">
       <div class="row">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
-              <p contenteditable="true">Partager un statut, une photo ou une vidéo</p>
+			<form method="post">
+              <input id="textPost" placeholder="Post" type="text" name="textPost" /><br>
               <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-picture"></span> Photo
               </button>  
@@ -75,14 +97,44 @@
                 <span class="glyphicon glyphicon-facetime-video"></span> Video
               </button>   
               <div class="text-right">
-              <button type="button" class="btn btn-default btn-sm">
+			  
+              <button type="submit" id="publier" name ="publier" value= "post" class="btn btn-default btn-sm">
                Publier
               </button> 
+			  </form>
               </div>    
             </div>
           </div>
         </div>
-      </div>
+      </div>'
+	
+<?php
+	 if(isset($_POST['publier']))	 
+	 {
+echo "ma bite" ;
+		 $db_handle = mysqli_connect("localhost","root", "");
+$db_found = mysqli_select_db($db_handle, "track");
+		 
+		 $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
+		 echo "textpost:".$TEXTPOST;
+	 $date=date("Y-m-d");
+	 $heure=date("H:i:s");
+	 
+		 // On recupere les infos de l'utilisateur correspondant
+		 $sql_post= "INSERT INTO publication (date, heure, text_publication) VALUES ('$date', '$heure', '$TEXTPOST')"; 
+		 
+		 if(mysqli_query($db_handle, $sql_post))
+		 {
+			 
+			 
+		 }
+	 }
+	
+	  
+	  
+	  
+	  
+?>
       
       <div class="row">
         <div class="col-sm-3">
