@@ -116,7 +116,10 @@ color:#800000;
 height:60px;
 width:500px;
 }
-
+.pls{
+font-size: 60px;
+color:black;
+}
 /* Style du formulaire 3 (pour créer un compte) */
 #form3{
 top:100px;
@@ -130,7 +133,8 @@ background:#D3D3D3;
 text-align: center;
 }
 
-#namebox{
+.namebox{
+	color:blue;
 margin-top:18px; /* espacement */
 left:290px;
 top:100px;
