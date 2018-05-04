@@ -1,10 +1,7 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Mon réseau</title>
+  <title>Votre profil</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -41,12 +38,12 @@
       <ul class="nav navbar-nav">
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li><a href="#">Accueil</a></li>
-        <li class="active"><a href="#">Mon réseau</a></li>
+        <li><a href="#">Mon réseau</a></li>
         <li><a href="#">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
-        <li><a href="#">Vous</a></li>
-        <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
+        <li class="active"><a href="#">Vous</a></li>
+         <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
        
       </ul>
@@ -55,58 +52,43 @@
   </div>
 </nav>
   
-
 <div class="container text-center">    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
         <p> Nawel Lalioui </p>
-        <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar"><br>
+        <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-picture"></span> Changer ma photo
+              </button>
       </div>  
     </div>
 
 
     <div class="col-sm-9">
+      
+      
+      
       <div class="row">
+    
         <div class="col-sm-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-body">
-              <p> <h3> <strong>MON RÉSEAU</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
-            
-              <div class="text-right">
-              
-              </div>    
-            </div>
+          <div class="well">
+            <p> <h3> <strong>MON PROFIL</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-envelope"></span> Mes informations
+              </button>  
+            <button type="button" class="btn btn-default btn-sm btn-success">
+                <span class="glyphicon glyphicon-picture"></span> Mes photos
+              </button>
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-briefcase"></span> Mon CV
+              </button>
+             
+              <br><br> <p>Photos</p>
           </div>
         </div>
       </div>
-      
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="well">
-            <p>Ami 1</p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-            <p>Ami 2</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="well">
-            <p>Ami 3</p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-            <p>Ami 4</p>
-          </div>
-        </div>
-      </div>
-      
+     
           
     </div>
    

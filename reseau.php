@@ -1,7 +1,10 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Emplois</title>
+  <title>Mon réseau</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -38,8 +41,8 @@
       <ul class="nav navbar-nav">
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li><a href="#">Accueil</a></li>
-        <li><a href="#">Mon réseau</a></li>
-        <li class="active"><a href="#">Emplois</a></li>
+        <li class="active"><a href="#">Mon réseau</a></li>
+        <li><a href="#">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
         <li><a href="#">Vous</a></li>
@@ -68,7 +71,7 @@
         <div class="col-sm-12">
           <div class="panel panel-default text-center">
             <div class="panel-body">
-              <p> <h3> <strong>EMPLOIS DISPONIBLES</strong> <span class="glyphicon glyphicon-briefcase"> </span></h3></p>
+              <p> <h3> <strong>MON RÉSEAU</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
             
               <div class="text-right">
               
@@ -81,12 +84,12 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="well">
-            <p>Emploi 1</p>
+            <p>Ami 1</p>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
-            <p>Emploi 2</p>
+            <p>Ami 2</p>
           </div>
         </div>
       </div>
@@ -94,12 +97,12 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="well">
-            <p>Emploi 1</p>
+            <p>Ami 3</p>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="well">
-            <p>Emploi 2</p>
+            <p>Ami 4</p>
           </div>
         </div>
       </div>
