@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Emplois</title>
+  <title>Recherche</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -44,9 +44,9 @@
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li><a href="pageAccueil.php">Accueil</a></li>
         <li><a href="reseau.php">Mon réseau</a></li>
-        <li class="active"><a href="emplois.php">Emplois</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
-        <li><a href="notifications.php">Notifications</a></li>
+        <li><a href="#">Notifications</a></li>
         <li><a href="profilInfos.php">Vous</a></li>
         <li><a href="profilModif.php">Modifier mon profil</a></li>
         <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
@@ -70,11 +70,10 @@ $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
  if ($db_found) {
- $sql = "SELECT nom, prenom , photo FROM utilisateur WHERE pseudo='$pseudo'";
+ $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
  $result = mysqli_query($db_handle, $sql);
  while ($data = mysqli_fetch_assoc($result)) {
- echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
- $pp=$data['photo'];
+ echo $data['prenom'] . " ". $data['nom'];
  }//end while 
  }//end if
 
@@ -84,16 +83,10 @@ $db_found = mysqli_select_db($db_handle, "track");
  }//end else
 //fermer la connection
 mysqli_close($db_handle);
-echo '</p>
-       <img src='.$pp.' class="img-thumbnail" height="150" width="150" alt="Avatar">
-       
-      <br><br>
-        <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-picture"></span> Changer ma photo
-              </button>
+?> </p>
+        <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
       </div>  
-    </div>';
-?>
+    </div>
 
 
     <div class="col-sm-9">
@@ -101,7 +94,7 @@ echo '</p>
         <div class="col-sm-12">
           <div class="panel panel-default text-center">
             <div class="panel-body">
-              <p> <h3> <strong>EMPLOIS DISPONIBLES</strong> <span class="glyphicon glyphicon-briefcase"> </span></h3></p>
+              <p> <h3> <strong> <span class="glyphicon glyphicon-search"> </span> Résultat de votre recherche:</strong></h3></p>
             
               <div class="text-right">
               

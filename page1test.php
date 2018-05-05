@@ -34,7 +34,7 @@ echo '<form method="post" >
 
 $ID = isset($_POST["id"])? $_POST["id"]:"";
 $MDP = isset($_POST["mdp"])? $_POST["mdp"]: ""; 
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
 
 if ($db_found)
@@ -77,8 +77,8 @@ echo '</div>';
 
 <!-- Dans le corps principal de la page, texte de présentation et formulaire pour créer un compte --> 
 <div class="body">
- <div id="mess1" class="body"> TRACK ou votre réseau<br>
- 	social professionnel </div>
+ <div id="mess1" class="body"> TRACK ou le réseau social <br>
+ 		professionnel de l'ECE Paris </div>
 <div id="mess2" class="body"> Créer un compte</div>
 <div id="img2" class="body"><img src="ece1.png"/></div>
 <div id="img3" class="body"><img src="ece2.png"/></div>

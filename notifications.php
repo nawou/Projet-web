@@ -1,7 +1,10 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Votre profil</title>
+  <title>Notifications</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,7 +18,6 @@
   session_start();
   $pseudo = $_SESSION['user'];
   $mdp= $_SESSION['mdp'];
-  $pp=$data['photo'];
 ?>
 <body>
 <nav class="navbar navbar-inverse">
@@ -47,8 +49,8 @@
         <li><a href="reseau.php">Mon réseau</a></li>
         <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
-        <li><a href="notifications.php">Notifications</a></li>
-        <li class="active"><a href="profilInfos.php">Vous</a></li>
+        <li class="active"><a href="notifications.php">Notifications</a></li>
+        <li><a href="profilInfos.php">Vous</a></li>
          <li><a href="profilModif.php">Modifier mon profil</a></li>
         <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
@@ -59,11 +61,12 @@
   </div>
 </nav>
   
+
 <div class="container text-center">    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <p> <p> 
+         <p> 
           <?php
 //identifier le nom de base de données
 $db_handle = mysqli_connect("localhost","root", "root");
@@ -74,7 +77,7 @@ $db_found = mysqli_select_db($db_handle, "track");
  $sql = "SELECT nom, prenom, photo FROM utilisateur WHERE pseudo='$pseudo'";
  $result = mysqli_query($db_handle, $sql);
  while ($data = mysqli_fetch_assoc($result)) {
- echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
+echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
    $pp=$data['photo'];
  }//end while 
  }//end if
@@ -96,36 +99,48 @@ echo '</p>
     </div>';
 ?>
 
-    <div class="col-sm-9">
-      
-      
-      
-      <div class="row">
-    
-        <div class="col-sm-12">
-          <div class="well">
-            <p> <h3> <strong>MON PROFIL</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
-             <a href="profilInfos.php"><button type="button" class="btn btn-default btn-sm">
-               <h5> Mes informations</h5>  <span class="glyphicon glyphicon-envelope"></span>
-              </button> </a>
-            <a href="profilPhotos.php"><button type="button" class="btn btn-default btn-sm btn-success">
-               <h5> Mes photos</h5>    <span class="glyphicon glyphicon-picture"></span> 
-              </button></a>
-            <a href="profilCV.php"><button type="button" class="btn btn-default btn-sm">
-                 <h5>  Mon CV </h5> <span class="glyphicon glyphicon-briefcase"></span>
-              </button></a>
-             
-              <br><br> <p>
-        <div class="well">
-        <img src="sweden.jpg" class="img-rounded" height="150" width="250" alt="Avatar">
-         <img src="dubai.jpg" class="img-rounded" height="150" width="250" alt="Avatar">
-      </div>
 
-            </p>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-center">
+            <div class="panel-body">
+              <p> <h3> <strong>MES NOTIFICATIONS</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
+            
+              <div class="text-right">
+              
+              </div>    
+            </div>
           </div>
         </div>
       </div>
-     
+      
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <p>Notif 1</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="well">
+            <p>Notif 2</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <p>Notif 3</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="well">
+            <p>Notif 4</p>
+          </div>
+        </div>
+      </div>
+      
           
     </div>
    

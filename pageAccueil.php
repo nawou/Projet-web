@@ -26,68 +26,67 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-       <!-- Recherche -->
-       <form class="navbar-form navbar-left" role="search">
+       
+
+<!-- Recherche -->
+       <form class="navbar-form navbar-left" role="search" method="post" >
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Rechercher..">
+          <input type="text" class="form-control" placeholder="Rechercher.." name="navBar">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button class="btn btn-default" type="input" name="recherche">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>        
         </div>
       </form>
     </div>
-<<<<<<< HEAD
-	<!-- Php pour la recherche-->
-	
-	<?php
-	
-	if(isset($_POST['recherche']))	 
-	 {
-		 // Connection a la bdd
-		 
-		 $db_handle = mysqli_connect("localhost","root", "");
-		 $db_found = mysqli_select_db($db_handle, "track");
-		 
-		 // On recupere la recherche saisie
-		 
-		 $RECHERCHE = isset($_POST["navBar"])? $_POST["navBar"]:""; 
-	 
-		 // On Verifie si il existe des utilisateurs avec ce nom/prenom
-		 
-		 $sql_post= "SELECT prenom, nom FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='RECHERCHE'"; 
-		 
-		 $result=mysqli_query($db_handle, $sql_post);
-		 // On verifie les champs rentre
-		 $data=mysqli_fetch_assoc($result);
-		 if ($data) // Si les champ identifiant n'est pas vide
-		 {
-			 echo "on a trouve ce pelo: " .$RECHERCHE;
-			 while ($data = mysqli_fetch_assoc($result)) {
-		echo "prenom: " . $data['prenom'] . '<br>';
-		echo "nom: " . $data['nom'] . '<br>';
-		}
-		 }
-		else
-		{
-			echo "On a trouvé personne";
-		}
-		
-		
+
+  <!-- Php pour la recherche-->
+  
+  <?php
+  
+  if(isset($_POST['recherche']))   
+   {
+
+     // Connection a la bdd
+     
+     $db_handle = mysqli_connect("localhost","root", "root");
+     $db_found = mysqli_select_db($db_handle, "track");
+     
+     // On recupere la recherche saisie
+     
+     $RECHERCHE = isset($_POST["navBar"])? $_POST["navBar"]:""; 
+   
+     // On Verifie si il existe des utilisateurs avec ce nom/prenom
+     
+     $sql_post= "SELECT * FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='$RECHERCHE'";
+
+     
+     $result=mysqli_query($db_handle, $sql_post);
+     // On verifie les champs rentre
+     while($data=mysqli_fetch_assoc($result))
+       
+       {
+          session_start();
+       $_SESSION['pseudoAmi']=$data['pseudo'];
+       $_SESSION['nomAmi']=$data['nom'];
+       $_SESSION['prenomAmi']=$data['prenom'];
+       $_SESSION['pp1']=$data['photo'];
+       header('Location: recherche.php');
+
+       
+       }
+    if (!$data)
+    {
+      echo "On a trouvé personne";
+    }
+    
+    
  
  }
-	 
-	
-	
-	
-	
-	
-	
-	
-	?>
-=======
->>>>>>> 92422ef2cf7b1379a708071d4ac5c16e40069ef6
+
+ ?>
+
     <!-- Barre de menu -->
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -96,7 +95,7 @@
         <li><a href="reseau.php">Mon réseau</a></li>
         <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
-        <li><a href="#">Notifications</a></li>
+        <li><a href="notifications.php">Notifications</a></li>
         <li><a href="profilInfos.php">Vous</a></li>
          <li><a href="profilModif.php">Modifier mon profil</a></li>
         <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
@@ -107,21 +106,22 @@
   </div>
 </nav>
  
-<div class="container text-center">    
+ <div class="container text-center">    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
         <p> <?php
 //identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
  if ($db_found) {
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
+ $sql = "SELECT nom, prenom,photo FROM utilisateur WHERE pseudo='$pseudo'";
  $result = mysqli_query($db_handle, $sql);
  while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
+ echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
+ $pp=$data['photo'];
  }//end while 
  }//end if
 
@@ -129,262 +129,102 @@ $db_found = mysqli_select_db($db_handle, "track");
  else {
  echo "Database not found";
  }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-        <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
+  //fermer la connection
+  mysqli_close($db_handle);
+  echo ' </p>
+        <img src='.$pp.' class="img-thumbnail" height="150" width="150" alt="Avatar">
       </div>  
     </div>
-
-
+ <!-- div class row -->
+ </div>';
+ ?> 
     <div class="col-sm-9">
       <div class="row">
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
             <form method="post">
-              <input id="textPost" placeholder="Post" type="text" name="textPost" /><br>
-              <button type="button" class="btn btn-default btn-sm">
+              <input id="textPost" placeholder="Postez un message         " type="text" name="textPost" /><br><br>
+              <button type="button" class="btn btn-default btn-sm btn-danger">
                 <span class="glyphicon glyphicon-picture"></span> Photo
               </button>  
-              <button type="button" class="btn btn-default btn-sm">
+              <button type="button" class="btn btn-default btn-sm btn-danger">
                 <span class="glyphicon glyphicon-facetime-video"></span> Video
               </button>   
               <div class="text-right">
         
-              <button type="submit" id="publier" name ="publier" value= "post" class="btn btn-default btn-sm">
+              <button type="submit" id="publier" name ="publier" value= "post" class="btn btn-default btn-sm btn-success">
                Publier
-              </button> 
-        </form>
-              </div>    
-            </div>
+              </button>
+              </div>     
+            </form>
+            </div>    
           </div>
         </div>
       </div>
+    </div>
+    <p>
 
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>
-           <?php
-if(isset($_POST['publier']))  
-   {
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
+    <?php
+    $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
+    if(isset($_POST['publier']))  
+       {
+    $db_handle = mysqli_connect("localhost","root", "root");
+    $db_found = mysqli_select_db($db_handle, "track");
+         
+      
+       $date=date("Y-m-d");
+       $heure=date("H:i:s");
+       
+         // Ajouter publication dans la base de données
+         $sql_post= "INSERT INTO publication (date, heure, test_publication,pseudo) VALUES ('$date', '$heure', '$TEXTPOST', '$pseudo')"; 
+         
+         if(mysqli_query($db_handle, $sql_post))
+         {
+           
+         }
+        } 
+    
+            
+    $db_handle = mysqli_connect("localhost","root", "root");
+    $db_found = mysqli_select_db($db_handle, "track"); 
+        if ($db_found) {
+     $sql1 = "SELECT pseudo, test_publication, date, heure FROM publication ORDER BY heure DESC";
+     $result1 = mysqli_query($db_handle, $sql1);
 
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
- $result = mysqli_query($db_handle, $sql);
- while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
- }//end while 
- }//end if
+     while ($data1 = mysqli_fetch_assoc($result1)) {        
+    echo '<div class="row">
+            <div class="well col-sm-9 panel panel-default text-left">
+              <div class="col-sm-1 pp_publi " >
+                <img src='.$pp.' class="img-circle" height="55" width="55" alt="Avatar"> <br><br>';
+                 echo '<strong> <h4>' . $data1['pseudo'] . '</h4></strong>' ;
+              echo '</div>
+            <div class="well col-sm-offset-1 col-sm-8 ">';
+    echo '<h4>' . $data1['test_publication'] . '</h4>' .'<br>' . '<i>' . $data1['date'] . "  " . $data1['heure'] . '</i>';
 
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-           <img src="pp.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p><?php
-     $db_handle1 = mysqli_connect("localhost","root", "");
-$db_found1 = mysqli_select_db($db_handle1, "track");
-     
-     $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
-    $date=date("Y-m-d");
-   $heure=date("H:i:s");
-   echo $TEXTPOST . '<br>' . $date . "  " . $heure;
-  
-     // On recupere les infos de l'utilisateur correspondant
-     $sql_post= "INSERT INTO publication (date, heure, text_publication) VALUES ('$date', '$heure', '$TEXTPOST')"; 
-     
-     if(mysqli_query($db_handle1, $sql_post))
-     { 
-     }
-<<<<<<< HEAD
-	 
-	 
-   
-}
-  
-  
-    
-    
-    
-    
-?>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p><?php 
-            echo $data['prenom'] . " ". $data['nom'];
-            ?></p>
-           <img src="pp.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p><?php 
-            echo $TEXTPOST .'<br>' . $date . "  " . $heure;
-            ?></p>
-            <button type="button" class="btn btn-default btn-sm">
-=======
-     ?>
+
+         if(mysqli_query($db_handle, $sql1))
+         { 
+         }
+      ?><p>
      <br>
-<button type="button" class="btn btn-default btn-sm">
->>>>>>> 92422ef2cf7b1379a708071d4ac5c16e40069ef6
-                <span class="glyphicon glyphicon-thumbs-up"></span> J'aime
-              </button>  
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-comment"></span> Commenter
-              </button>  
-          </div>
-        </div>
-      </div>
-     <?php
-}  
-?></p>
+      <button type="button" class="btn btn-default btn-sm btn-danger">
+                      <span class="glyphicon glyphicon-thumbs-up"></span> J'aime
+                    </button>  
+                  <button type="button" class="btn btn-default btn-sm btn-danger">
+                      <span class="glyphicon glyphicon-comment"></span> Commenter
+                    </button>  
+                </div>
+                </div>
+                </div>
 
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
            <?php
-if(isset($_POST['publier']))  
-   {
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
+        }
+      }
+      ?> 
+</p>
 
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
- $result = mysqli_query($db_handle, $sql);
- while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-           <img src="pp.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p><?php
-     $db_handle1 = mysqli_connect("localhost","root", "");
-$db_found1 = mysqli_select_db($db_handle1, "track");
-     
-     $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
-    $date=date("Y-m-d");
-   $heure=date("H:i:s");
-   echo $TEXTPOST . '<br>' . $date . "  " . $heure;
-  
-     // On recupere les infos de l'utilisateur correspondant
-     $sql_post= "INSERT INTO publication (date, heure, text_publication) VALUES ('$date', '$heure', '$TEXTPOST')"; 
-     
-     if(mysqli_query($db_handle1, $sql_post))
-     { 
-     }
-     ?>
-     <br>
-<button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> J'aime
-              </button>  
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-comment"></span> Commenter
-              </button>  
-          </div>
-        </div>
-      </div>
-     <?php
-}  
-?></p>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>
-           <?php
-if(isset($_POST['publier']))  
-   {
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
-
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
- $result = mysqli_query($db_handle, $sql);
- while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-           <img src="pp.png" class="img-circle" height="55" width="55" alt="Avatar"></div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p><?php
-     $db_handle1 = mysqli_connect("localhost","root", "");
-$db_found1 = mysqli_select_db($db_handle1, "track");
-     
-     $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
-    $date=date("Y-m-d");
-   $heure=date("H:i:s");
-   echo $TEXTPOST . '<br>' . $date . "  " . $heure;
-  
-     // On recupere les infos de l'utilisateur correspondant
-     $sql_post= "INSERT INTO publication (date, heure, text_publication) VALUES ('$date', '$heure', '$TEXTPOST')"; 
-     
-     if(mysqli_query($db_handle1, $sql_post))
-     { 
-     }
-     ?>
-     <br>
-<button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> J'aime
-              </button>  
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-comment"></span> Commenter
-              </button>  
-          </div>
-        </div>
-      </div>
-     <?php
-}  
-?></p>
-
-    
-
-<!-- Barre en bas de la page --> 
-<div id="barre2" class="body">
-<div id="footer" class="barre2"> Droits d'auteur | Copyright © 2018, ANS.  </div> 
+<!-- container text center -->   
 </div>
-
-
 </body>
 </html>

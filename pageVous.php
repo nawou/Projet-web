@@ -59,7 +59,7 @@
       <div class="well">
         <p> <?php
 //identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement

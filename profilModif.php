@@ -16,6 +16,7 @@
   session_start();
   $pseudo = $_SESSION['user'];
   $mdp= $_SESSION['mdp'];
+  $pp=$data['photo'];
 ?>
 <body>
 <nav class="navbar navbar-inverse">
@@ -47,7 +48,7 @@
         <li><a href="reseau.php">Mon réseau</a></li>
         <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
-        <li><a href="#">Notifications</a></li>
+        <li><a href="notifications.php">Notifications</a></li>
         <li><a href="profilInfos.php">Vous</a></li>
         <li class="active"><a href="profilModif.php">Modifier mon profil</a></li>
          <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
@@ -66,15 +67,16 @@
           <p> 
           <?php
 //identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
  if ($db_found) {
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
+ $sql = "SELECT nom, prenom, photo FROM utilisateur WHERE pseudo='$pseudo'";
  $result = mysqli_query($db_handle, $sql);
  while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
+ echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
+   $pp=$data['photo'];
  }//end while 
  }//end if
 
@@ -84,15 +86,15 @@ $db_found = mysqli_select_db($db_handle, "track");
  }//end else
 //fermer la connection
 mysqli_close($db_handle);
-?> </p>
-        <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
-      <br>
+echo '</p>
+      <img src='.$pp.' class="img-thumbnail" height="150" width="150" alt="Avatar">
+      <br><br>
         <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-picture"></span> Changer ma photo
               </button>
       </div>  
-    </div>
-
+    </div>';
+?>
 
     <div class="col-sm-9">
       
@@ -106,7 +108,7 @@ mysqli_close($db_handle);
             <small id="changeHelp" class="form-text text-muted"> Veuillez entrer les informations que vous souhaitez modifier et cliquer sur "confirmer": </small>
 <?php
 //identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
 
 echo '<form method="post" =>
@@ -145,7 +147,7 @@ if ($db_found)
   
       if( $prenom=="" || $nom=="" || $numero=="" || $sexe=="" || $statut=="")
        {
-        echo "Tous les champs ne sont pas rempli";
+        echo "Tous les champs ne sont pas remplis";
        }
 
       else

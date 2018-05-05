@@ -16,6 +16,11 @@
   session_start();
   $pseudo = $_SESSION['user'];
   $mdp= $_SESSION['mdp'];
+  $pseudoAmi=$_SESSION['pseudoAmi'];
+  $nomAmi=$_SESSION['nomAmi'];
+  $prenomAmi=$_SESSION['prenomAmi'];
+  $pp1=$_SESSION['pp1'];
+  
 ?>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -26,18 +31,59 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-       <!-- Recherche -->
-       <form class="navbar-form navbar-left" role="search">
+      <!-- Recherche -->
+       <form class="navbar-form navbar-left" role="search" method="post" >
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Rechercher..">
+          <input type="text" class="form-control" placeholder="Rechercher.." name="navBar">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button class="btn btn-default" type="input" name="recherche">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>        
         </div>
       </form>
     </div>
+
+  <!-- Php pour la recherche-->
+  
+  <?php
+  
+  if(isset($_POST['recherche']))   
+   {
+
+     // Connection a la bdd
+     
+     $db_handle = mysqli_connect("localhost","root", "root");
+     $db_found = mysqli_select_db($db_handle, "track");
+     
+     // On recupere la recherche saisie
+     
+     $RECHERCHE = isset($_POST["navBar"])? $_POST["navBar"]:""; 
+   
+     // On Verifie si il existe des utilisateurs avec ce nom/prenom
+     
+     $sql_post= "SELECT pseudo,photo FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='$RECHERCHE'"; 
+     
+     $result=mysqli_query($db_handle, $sql_post);
+     // On verifie les champs rentre
+     while($data=mysqli_fetch_assoc($result))
+       
+       {
+        
+          session_start();
+       $_SESSION['pseudoAmi']=$data['pseudo'];
+       header('Location: recherche.php');
+       
+       }
+    if (!$data)
+    {
+      echo "Personne introuvable";
+    }
+    
+    
+ 
+ }
+  ?>
     <!-- Barre de menu -->
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -46,7 +92,7 @@
         <li><a href="reseau.php">Mon réseau</a></li>
         <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
-        <li><a href="#">Notifications</a></li>
+        <li><a href="#notitifications.php">Notifications</a></li>
         <li><a href="profilInfos.php">Vous</a></li>
         <li><a href="profilModif.php">Modifier mon profil</a></li>
         <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
@@ -70,10 +116,11 @@ $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
  if ($db_found) {
- $sql = "SELECT nom, prenom FROM utilisateur WHERE pseudo='$pseudo'";
+ $sql = "SELECT nom, prenom, photo FROM utilisateur WHERE pseudo='$pseudo'";
  $result = mysqli_query($db_handle, $sql);
  while ($data = mysqli_fetch_assoc($result)) {
- echo $data['prenom'] . " ". $data['nom'];
+ echo '<u><h4>' . $data['prenom'] . " ". $data['nom'] . '</h4></u>';
+ $pp=$data['photo'];
  }//end while 
  }//end if
 
@@ -83,146 +130,95 @@ $db_found = mysqli_select_db($db_handle, "track");
  }//end else
 //fermer la connection
 mysqli_close($db_handle);
-?> </p>
-        <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
+echo '</p>
+       <img src='.$pp.' class="img-circle" height="65" width="65" alt="Avatar">
+       
+      <br><br>
+        <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-picture"></span> Changer ma photo
+              </button>
       </div>  
-    </div>
+    </div>';
+?>
+
 
 
     <div class="col-sm-9">
-      <div class="row">
+      
         <div class="col-sm-12">
           <div class="panel panel-default text-center">
             <div class="panel-body">
               <p> <h3> <strong> <span class="glyphicon glyphicon-search"> </span> Résultat de votre recherche:</strong></h3></p>
             
-              <div class="text-right">
-              
-              </div>    
+               
             </div>
           </div>
         </div>
-      </div>
+      
          
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="well">
-        <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "root");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql1 = "SELECT titre, compagnie ,description FROM emploi where id_offre='1'";
- $result1 = mysqli_query($db_handle, $sql1);
- while ($data1 = mysqli_fetch_assoc($result1)) {
- echo '<strong>'  . "Titre: " .'</strong>'  . $data1['titre'] . '<br>';
- echo '<strong>'  ."Compagnie: " .'</strong>'  . $data1['compagnie'] . '<br>';
- echo '<strong>'  ."Description: " .'</strong>'  . $data1['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-               <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "root");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql2 = "SELECT titre, compagnie ,description FROM emploi where id_offre='2'";
- $result2 = mysqli_query($db_handle, $sql2);
- while ($data2 = mysqli_fetch_assoc($result2)) {
- echo '<strong>'  . "Titre: " .'</strong>'  . $data2['titre'] . '<br>';
- echo '<strong>'  ."Compagnie: " .'</strong>'  . $data2['compagnie'] . '<br>';
- echo '<strong>'  ."Description: " .'</strong>'  . $data2['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="well"> 
-                <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql3 = "SELECT titre, compagnie ,description FROM emploi where id_offre='3'";
- $result3 = mysqli_query($db_handle, $sql3);
- while ($data3 = mysqli_fetch_assoc($result3)) {
- echo '<strong>'  . "Titre: " .'</strong>'  . $data3['titre'] . '<br>';
- echo '<strong>'  ."Compagnie: " .'</strong>'  . $data3['compagnie'] . '<br>';
- echo '<strong>'  ."Description: " .'</strong>'  . $data3['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-            <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "root");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql4 = "SELECT titre, compagnie ,description FROM emploi where id_offre='4'";
- $result4 = mysqli_query($db_handle, $sql4);
- while ($data4 = mysqli_fetch_assoc($result4)) {
- echo '<strong>'  . "Titre: " .'</strong>'  . $data4['titre'] . '<br>';
- echo '<strong>'  ."Compagnie: " .'</strong>'  . $data4['compagnie'] . '<br>';
- echo '<strong>'  ."Description: " .'</strong>'  . $data4['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-      </div>
-      
-          
-    </div>
+  
    
+         <div class="col-sm-6">
+      <div class="well">
+    <p><h4>
+    <?php
+
+    echo '<strong>'  . "Pseudo: " .'</strong>'  . $pseudoAmi . '<br>';
+    echo '<strong>'  ."Prénom: " .'</strong>'  . $prenomAmi . '<br>';
+    echo '<strong>'  ."Nom: " .'</strong>'  . $nomAmi . '<br>';
+    //echo '</h4></p><br><img src=' . $pp1 .' class="img-circle" height="65" width="65" alt="Avatar">';  ?>
+ <br> <br>
+ <form method="post">
+    <button type="submit" class="btn btn-default btn-sm btn-success" name="submit">
+                <span class="glyphicon glyphicon-user"></span> Ajouter en ami
+              </button>  
+  </form>
+      
+       </div>
+        </div>
+    </div>
   </div>
 </div>
+
+<?php
+
+if(isset($_POST['submit']))   
+   {
+
+
+
+     // Connection a la bdd
+     
+     $db_handle = mysqli_connect("localhost","root", "root");
+     $db_found = mysqli_select_db($db_handle, "track");
+     
+     // On recupere la recherche saisie
+  
+     
+   
+   
+       // On Verifie si il existe des utilisateurs avec ce nom/prenom
+     
+     $sql_ami= "INSERT INTO ami (pseudo1,pseudo2) VALUES ('$pseudo', '$pseudoAmi')";
+     $sql_ami2="INSERT INTO ami (pseudo1,pseudo2) VALUES ('$pseudoAmi', '$pseudo')";
+     $r=mysqli_query($db_handle, $sql_ami);
+     $res=mysqli_query($db_handle, $sql_ami);
+     // On verifie les champs rentre
+     if ($r)
+       {
+       
+       echo 'Ami ajouté !';
+       
+       }
+      if (!$r)
+      {
+        echo 'Echec ami';
+      } 
+     
+   }
+
+?>
+
 
 <!-- Barre en bas de la page --> 
 <div id="barre2" class="body">

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 05 mai 2018 à 08:43
--- Version du serveur :  5.7.19
--- Version de PHP :  5.6.31
+-- Hôte : localhost
+-- Généré le :  sam. 05 mai 2018 à 16:19
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,11 +26,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `album`
 --
 
-DROP TABLE IF EXISTS `album`;
-CREATE TABLE IF NOT EXISTS `album` (
-  `id_album` int(11) NOT NULL AUTO_INCREMENT,
-  `titre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_album`)
+CREATE TABLE `album` (
+  `id_album` int(11) NOT NULL,
+  `titre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -41,15 +37,18 @@ CREATE TABLE IF NOT EXISTS `album` (
 -- Structure de la table `ami`
 --
 
-DROP TABLE IF EXISTS `ami`;
-CREATE TABLE IF NOT EXISTS `ami` (
-  `id_ami` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ami` (
+  `id_ami` int(11) NOT NULL,
   `pseudo1` varchar(50) DEFAULT NULL,
-  `pseudo2` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_ami`),
-  KEY `pseudo1` (`pseudo1`),
-  KEY `pseudo2` (`pseudo2`)
+  `pseudo2` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ami`
+--
+
+INSERT INTO `ami` (`id_ami`, `pseudo1`, `pseudo2`) VALUES
+(1, 'pseudo', 'pseudoAmi');
 
 -- --------------------------------------------------------
 
@@ -57,15 +56,11 @@ CREATE TABLE IF NOT EXISTS `ami` (
 -- Structure de la table `commentaire_photo`
 --
 
-DROP TABLE IF EXISTS `commentaire_photo`;
-CREATE TABLE IF NOT EXISTS `commentaire_photo` (
-  `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commentaire_photo` (
+  `id_commentaire` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
   `id_photo` int(11) DEFAULT NULL,
-  `commentaire` tinytext NOT NULL,
-  PRIMARY KEY (`id_commentaire`),
-  KEY `id_photo` (`id_photo`),
-  KEY `pseudo` (`pseudo`)
+  `commentaire` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -74,15 +69,11 @@ CREATE TABLE IF NOT EXISTS `commentaire_photo` (
 -- Structure de la table `commentaire_publication`
 --
 
-DROP TABLE IF EXISTS `commentaire_publication`;
-CREATE TABLE IF NOT EXISTS `commentaire_publication` (
-  `id_commentairepub` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commentaire_publication` (
+  `id_commentairepub` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
   `id_publication` int(11) DEFAULT NULL,
-  `commentairepub` tinytext NOT NULL,
-  PRIMARY KEY (`id_commentairepub`),
-  KEY `id_publication` (`id_publication`),
-  KEY `pseudo` (`pseudo`)
+  `commentairepub` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -91,11 +82,9 @@ CREATE TABLE IF NOT EXISTS `commentaire_publication` (
 -- Structure de la table `competence`
 --
 
-DROP TABLE IF EXISTS `competence`;
-CREATE TABLE IF NOT EXISTS `competence` (
-  `id_competence` int(11) NOT NULL AUTO_INCREMENT,
-  `competence` int(11) NOT NULL,
-  PRIMARY KEY (`id_competence`)
+CREATE TABLE `competence` (
+  `id_competence` int(11) NOT NULL,
+  `competence` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -104,14 +93,12 @@ CREATE TABLE IF NOT EXISTS `competence` (
 -- Structure de la table `emploi`
 --
 
-DROP TABLE IF EXISTS `emploi`;
-CREATE TABLE IF NOT EXISTS `emploi` (
+CREATE TABLE `emploi` (
   `titre` varchar(50) NOT NULL,
   `compagnie` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `id_offre` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id_offre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `id_offre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `emploi`
@@ -129,14 +116,12 @@ INSERT INTO `emploi` (`titre`, `compagnie`, `description`, `id_offre`) VALUES
 -- Structure de la table `evenenement`
 --
 
-DROP TABLE IF EXISTS `evenenement`;
-CREATE TABLE IF NOT EXISTS `evenenement` (
-  `id_evenement` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `evenenement` (
+  `id_evenement` int(11) NOT NULL,
   `date` date NOT NULL,
   `heure` time NOT NULL,
   `lieu` varchar(50) NOT NULL,
-  `confidentialite` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_evenement`)
+  `confidentialite` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -145,12 +130,9 @@ CREATE TABLE IF NOT EXISTS `evenenement` (
 -- Structure de la table `event`
 --
 
-DROP TABLE IF EXISTS `event`;
-CREATE TABLE IF NOT EXISTS `event` (
+CREATE TABLE `event` (
   `id_evenement` int(11) DEFAULT NULL,
-  `pseudo` varchar(50) DEFAULT NULL,
-  KEY `id_evenement` (`id_evenement`),
-  KEY `pseudo` (`pseudo`)
+  `pseudo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -159,13 +141,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Structure de la table `experience`
 --
 
-DROP TABLE IF EXISTS `experience`;
-CREATE TABLE IF NOT EXISTS `experience` (
-  `id_experience` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `experience` (
+  `id_experience` int(11) NOT NULL,
   `date` date NOT NULL,
   `lieu` varchar(50) NOT NULL,
-  `experience` tinytext NOT NULL,
-  PRIMARY KEY (`id_experience`)
+  `experience` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -174,13 +154,11 @@ CREATE TABLE IF NOT EXISTS `experience` (
 -- Structure de la table `formation`
 --
 
-DROP TABLE IF EXISTS `formation`;
-CREATE TABLE IF NOT EXISTS `formation` (
-  `id_formation` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `formation` (
+  `id_formation` int(11) NOT NULL,
   `lieu` varchar(50) NOT NULL,
   `date` date NOT NULL,
-  `formation` tinytext NOT NULL,
-  PRIMARY KEY (`id_formation`)
+  `formation` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -189,11 +167,9 @@ CREATE TABLE IF NOT EXISTS `formation` (
 -- Structure de la table `interet`
 --
 
-DROP TABLE IF EXISTS `interet`;
-CREATE TABLE IF NOT EXISTS `interet` (
-  `id_interet` int(11) NOT NULL AUTO_INCREMENT,
-  `interet` tinytext NOT NULL,
-  PRIMARY KEY (`id_interet`)
+CREATE TABLE `interet` (
+  `id_interet` int(11) NOT NULL,
+  `interet` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -202,14 +178,10 @@ CREATE TABLE IF NOT EXISTS `interet` (
 -- Structure de la table `like_photo`
 --
 
-DROP TABLE IF EXISTS `like_photo`;
-CREATE TABLE IF NOT EXISTS `like_photo` (
-  `id_like` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `like_photo` (
+  `id_like` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
-  `id_photo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_like`),
-  KEY `pseudo` (`pseudo`),
-  KEY `id_photo` (`id_photo`)
+  `id_photo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -218,14 +190,10 @@ CREATE TABLE IF NOT EXISTS `like_photo` (
 -- Structure de la table `like_publication`
 --
 
-DROP TABLE IF EXISTS `like_publication`;
-CREATE TABLE IF NOT EXISTS `like_publication` (
-  `id_likePub` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `like_publication` (
+  `id_likePub` int(11) NOT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
-  `id_publication` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_likePub`),
-  KEY `pseudo` (`pseudo`),
-  KEY `id_publication` (`id_publication`)
+  `id_publication` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -234,15 +202,11 @@ CREATE TABLE IF NOT EXISTS `like_publication` (
 -- Structure de la table `messagerie`
 --
 
-DROP TABLE IF EXISTS `messagerie`;
-CREATE TABLE IF NOT EXISTS `messagerie` (
-  `id_message` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messagerie` (
+  `id_message` int(11) NOT NULL,
   `expediteur` varchar(50) DEFAULT NULL,
   `destinataire` varchar(50) DEFAULT NULL,
-  `message` tinytext NOT NULL,
-  PRIMARY KEY (`id_message`),
-  KEY `destinataire` (`destinataire`),
-  KEY `expediteur` (`expediteur`)
+  `message` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -251,16 +215,13 @@ CREATE TABLE IF NOT EXISTS `messagerie` (
 -- Structure de la table `photo`
 --
 
-DROP TABLE IF EXISTS `photo`;
-CREATE TABLE IF NOT EXISTS `photo` (
-  `id_photo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `photo` (
+  `id_photo` int(11) NOT NULL,
   `date` date NOT NULL,
   `heure` time NOT NULL,
   `lieu` varchar(50) NOT NULL,
   `confidentialite` varchar(50) NOT NULL,
-  `id_album` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_photo`),
-  KEY `id_album` (`id_album`)
+  `id_album` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -269,12 +230,9 @@ CREATE TABLE IF NOT EXISTS `photo` (
 -- Structure de la table `post`
 --
 
-DROP TABLE IF EXISTS `post`;
-CREATE TABLE IF NOT EXISTS `post` (
+CREATE TABLE `post` (
   `id_publication` int(11) DEFAULT NULL,
-  `pseudo` varchar(50) DEFAULT NULL,
-  KEY `Id_publication` (`id_publication`),
-  KEY `pseudo` (`pseudo`)
+  `pseudo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -283,12 +241,9 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Structure de la table `postulant`
 --
 
-DROP TABLE IF EXISTS `postulant`;
-CREATE TABLE IF NOT EXISTS `postulant` (
+CREATE TABLE `postulant` (
   `pseudo` varchar(50) DEFAULT NULL,
-  `id_offre` int(11) DEFAULT NULL,
-  KEY `pseudo` (`pseudo`),
-  KEY `id_offre` (`id_offre`)
+  `id_offre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -297,14 +252,10 @@ CREATE TABLE IF NOT EXISTS `postulant` (
 -- Structure de la table `profil`
 --
 
-DROP TABLE IF EXISTS `profil`;
-CREATE TABLE IF NOT EXISTS `profil` (
+CREATE TABLE `profil` (
   `id_photo` int(11) DEFAULT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
-  `type` varchar(2) DEFAULT NULL,
-  KEY `id_photo` (`id_photo`),
-  KEY `pseudo` (`pseudo`),
-  KEY `type` (`type`)
+  `type` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -313,14 +264,20 @@ CREATE TABLE IF NOT EXISTS `profil` (
 -- Structure de la table `publication`
 --
 
-DROP TABLE IF EXISTS `publication`;
-CREATE TABLE IF NOT EXISTS `publication` (
-  `id_publication` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publication` (
+  `id_publication` int(11) NOT NULL,
   `date` date NOT NULL,
   `heure` time NOT NULL,
   `test_publication` text,
-  PRIMARY KEY (`id_publication`)
+  `pseudo` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `publication`
+--
+
+INSERT INTO `publication` (`id_publication`, `date`, `heure`, `test_publication`, `pseudo`) VALUES
+(7, '2018-05-05', '16:09:27', 'Bonjour !', 'nawou');
 
 -- --------------------------------------------------------
 
@@ -328,12 +285,10 @@ CREATE TABLE IF NOT EXISTS `publication` (
 -- Structure de la table `statut`
 --
 
-DROP TABLE IF EXISTS `statut`;
-CREATE TABLE IF NOT EXISTS `statut` (
-  `id_statut` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_statut` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id_statut`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `statut` (
+  `id_statut` int(11) NOT NULL,
+  `nom_statut` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `statut`
@@ -348,11 +303,9 @@ INSERT INTO `statut` (`id_statut`, `nom_statut`) VALUES
 -- Structure de la table `type_photo`
 --
 
-DROP TABLE IF EXISTS `type_photo`;
-CREATE TABLE IF NOT EXISTS `type_photo` (
+CREATE TABLE `type_photo` (
   `type` varchar(2) NOT NULL,
-  `nom_type` varchar(50) NOT NULL,
-  PRIMARY KEY (`type`)
+  `nom_type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -361,15 +314,14 @@ CREATE TABLE IF NOT EXISTS `type_photo` (
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
+CREATE TABLE `utilisateur` (
   `pseudo` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `mdp` varchar(50) NOT NULL,
   `date_naissance` date NOT NULL,
-  `tel` int(8) NOT NULL,
+  `tel` varchar(15) NOT NULL,
   `sexe` char(1) NOT NULL,
   `statut_pro` varchar(50) NOT NULL,
   `id_statut` int(255) DEFAULT NULL,
@@ -381,31 +333,279 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `experience` text,
   `competences` text,
   `interets` text,
-  PRIMARY KEY (`pseudo`),
-  KEY `id_formation` (`id_formation`),
-  KEY `id_experience` (`id_experience`),
-  KEY `id_interet` (`id_interet`),
-  KEY `id_competence` (`id_competence`),
-  KEY `id_statut` (`id_statut`)
+  `photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`, `formation`, `experience`, `competences`, `interets`) VALUES
-('sou97', 'maherzi', 'soufia', 'smaherzi@yahoo.fr', 'sou', '1997-03-10', 640464483, 'F', 'etudiant', 1, NULL, NULL, NULL, NULL, 'ING 3 ECE', 'STAGE', 'PHP', 'ne pas dormir');
+INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`, `formation`, `experience`, `competences`, `interets`, `photo`) VALUES
+('nawou', 'Lalioui', 'Nawel', 'nawel.uae@gmail.com', 'na', '1996-07-21', '0643882803', 'F', 'Etudiante', NULL, NULL, NULL, NULL, NULL, 'Paris-Sud', 'prof', 'JAVA', 'Gastronomie', 'ppnawou.jpeg'),
+('sou97', 'Maherzi', 'Soufia', 'smaherzi@yahoo.fr', 'sou', '1997-03-10', '0640464483', 'F', 'Etudiante', 1, NULL, NULL, NULL, NULL, 'PREPA', 'Emploi', 'HTML', 'sport', 'ppsoufia.jpeg');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `album`
+--
+ALTER TABLE `album`
+  ADD PRIMARY KEY (`id_album`);
+
+--
+-- Index pour la table `ami`
+--
+ALTER TABLE `ami`
+  ADD PRIMARY KEY (`id_ami`),
+  ADD KEY `pseudo1` (`pseudo1`),
+  ADD KEY `pseudo2` (`pseudo2`);
+
+--
+-- Index pour la table `commentaire_photo`
+--
+ALTER TABLE `commentaire_photo`
+  ADD PRIMARY KEY (`id_commentaire`),
+  ADD KEY `id_photo` (`id_photo`),
+  ADD KEY `pseudo` (`pseudo`);
+
+--
+-- Index pour la table `commentaire_publication`
+--
+ALTER TABLE `commentaire_publication`
+  ADD PRIMARY KEY (`id_commentairepub`),
+  ADD KEY `id_publication` (`id_publication`),
+  ADD KEY `pseudo` (`pseudo`);
+
+--
+-- Index pour la table `competence`
+--
+ALTER TABLE `competence`
+  ADD PRIMARY KEY (`id_competence`);
+
+--
+-- Index pour la table `emploi`
+--
+ALTER TABLE `emploi`
+  ADD PRIMARY KEY (`id_offre`);
+
+--
+-- Index pour la table `evenenement`
+--
+ALTER TABLE `evenenement`
+  ADD PRIMARY KEY (`id_evenement`);
+
+--
+-- Index pour la table `event`
+--
+ALTER TABLE `event`
+  ADD KEY `id_evenement` (`id_evenement`),
+  ADD KEY `pseudo` (`pseudo`);
+
+--
+-- Index pour la table `experience`
+--
+ALTER TABLE `experience`
+  ADD PRIMARY KEY (`id_experience`);
+
+--
+-- Index pour la table `formation`
+--
+ALTER TABLE `formation`
+  ADD PRIMARY KEY (`id_formation`);
+
+--
+-- Index pour la table `interet`
+--
+ALTER TABLE `interet`
+  ADD PRIMARY KEY (`id_interet`);
+
+--
+-- Index pour la table `like_photo`
+--
+ALTER TABLE `like_photo`
+  ADD PRIMARY KEY (`id_like`),
+  ADD KEY `pseudo` (`pseudo`),
+  ADD KEY `id_photo` (`id_photo`);
+
+--
+-- Index pour la table `like_publication`
+--
+ALTER TABLE `like_publication`
+  ADD PRIMARY KEY (`id_likePub`),
+  ADD KEY `pseudo` (`pseudo`),
+  ADD KEY `id_publication` (`id_publication`);
+
+--
+-- Index pour la table `messagerie`
+--
+ALTER TABLE `messagerie`
+  ADD PRIMARY KEY (`id_message`),
+  ADD KEY `destinataire` (`destinataire`),
+  ADD KEY `expediteur` (`expediteur`);
+
+--
+-- Index pour la table `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`id_photo`),
+  ADD KEY `id_album` (`id_album`);
+
+--
+-- Index pour la table `post`
+--
+ALTER TABLE `post`
+  ADD KEY `Id_publication` (`id_publication`),
+  ADD KEY `pseudo` (`pseudo`);
+
+--
+-- Index pour la table `postulant`
+--
+ALTER TABLE `postulant`
+  ADD KEY `pseudo` (`pseudo`),
+  ADD KEY `id_offre` (`id_offre`);
+
+--
+-- Index pour la table `profil`
+--
+ALTER TABLE `profil`
+  ADD KEY `id_photo` (`id_photo`),
+  ADD KEY `pseudo` (`pseudo`),
+  ADD KEY `type` (`type`);
+
+--
+-- Index pour la table `publication`
+--
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`id_publication`);
+
+--
+-- Index pour la table `statut`
+--
+ALTER TABLE `statut`
+  ADD PRIMARY KEY (`id_statut`);
+
+--
+-- Index pour la table `type_photo`
+--
+ALTER TABLE `type_photo`
+  ADD PRIMARY KEY (`type`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`pseudo`),
+  ADD KEY `id_formation` (`id_formation`),
+  ADD KEY `id_experience` (`id_experience`),
+  ADD KEY `id_interet` (`id_interet`),
+  ADD KEY `id_competence` (`id_competence`),
+  ADD KEY `id_statut` (`id_statut`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `album`
+--
+ALTER TABLE `album`
+  MODIFY `id_album` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `ami`
+--
+ALTER TABLE `ami`
+  MODIFY `id_ami` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT pour la table `commentaire_photo`
+--
+ALTER TABLE `commentaire_photo`
+  MODIFY `id_commentaire` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `commentaire_publication`
+--
+ALTER TABLE `commentaire_publication`
+  MODIFY `id_commentairepub` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `competence`
+--
+ALTER TABLE `competence`
+  MODIFY `id_competence` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `emploi`
+--
+ALTER TABLE `emploi`
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `evenenement`
+--
+ALTER TABLE `evenenement`
+  MODIFY `id_evenement` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `experience`
+--
+ALTER TABLE `experience`
+  MODIFY `id_experience` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `formation`
+--
+ALTER TABLE `formation`
+  MODIFY `id_formation` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `interet`
+--
+ALTER TABLE `interet`
+  MODIFY `id_interet` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `like_photo`
+--
+ALTER TABLE `like_photo`
+  MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `like_publication`
+--
+ALTER TABLE `like_publication`
+  MODIFY `id_likePub` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `messagerie`
+--
+ALTER TABLE `messagerie`
+  MODIFY `id_message` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `photo`
+--
+ALTER TABLE `photo`
+  MODIFY `id_photo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `publication`
+--
+ALTER TABLE `publication`
+  MODIFY `id_publication` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `statut`
+--
+ALTER TABLE `statut`
+  MODIFY `id_statut` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `ami`
---
-ALTER TABLE `ami`
-  ADD CONSTRAINT `ami_ibfk_1` FOREIGN KEY (`pseudo1`) REFERENCES `utilisateur` (`pseudo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ami_ibfk_2` FOREIGN KEY (`pseudo2`) REFERENCES `utilisateur` (`pseudo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `commentaire_photo`
@@ -486,7 +686,6 @@ ALTER TABLE `utilisateur`
   ADD CONSTRAINT `utilisateur_ibfk_3` FOREIGN KEY (`id_formation`) REFERENCES `formation` (`id_formation`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `utilisateur_ibfk_4` FOREIGN KEY (`id_interet`) REFERENCES `interet` (`id_interet`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `utilisateur_ibfk_5` FOREIGN KEY (`id_statut`) REFERENCES `statut` (`id_statut`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
