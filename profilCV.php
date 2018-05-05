@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Emplois</title>
+  <title>Votre CV</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -44,11 +44,12 @@
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
         <li><a href="pageAccueil.php">Accueil</a></li>
         <li><a href="reseau.php">Mon réseau</a></li>
-        <li class="active"><a href="#">Emplois</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
-        <li><a href="#">Vous</a></li>
-        <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
+        <li class="active"><a href="profilInfos.php">Vous</a></li>
+         <li><a href="profilModif.php">Modifier mon profil</a></li>
+        <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
        
       </ul>
@@ -57,12 +58,11 @@
   </div>
 </nav>
   
-
 <div class="container text-center">    
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <p> <?php
+       <p> <?php
 //identifier le nom de base de données
 $db_handle = mysqli_connect("localhost","root", "");
 $db_found = mysqli_select_db($db_handle, "track");
@@ -84,41 +84,105 @@ $db_found = mysqli_select_db($db_handle, "track");
 mysqli_close($db_handle);
 ?> </p>
         <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
+      <br>
+        <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-picture"></span> Changer ma photo
+              </button>
       </div>  
     </div>
 
 
     <div class="col-sm-9">
+      
+      
+      
       <div class="row">
+    
         <div class="col-sm-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-body">
-              <p> <h3> <strong>EMPLOIS DISPONIBLES</strong> <span class="glyphicon glyphicon-briefcase"> </span></h3></p>
-            
-              <div class="text-right">
-              
-              </div>    
-            </div>
-          </div>
-        </div>
-      </div>
-         
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="well">
-        <p> <?php
+          <div class="well">
+            <p> <h3> <strong>MON CV</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
+             <a href="profilInfos.php"><button type="button" class="btn btn-default btn-sm">
+               <h5> Mes informations</h5>  <span class="glyphicon glyphicon-envelope"></span>
+              </button> </a>
+            <a href="profilPhotos.php"><button type="button" class="btn btn-default btn-sm">
+               <h5> Mes photos</h5>    <span class="glyphicon glyphicon-picture"></span> 
+              </button></a>
+             <a href="profilCV.php"><button type="button" class="btn btn-default btn-sm btn-success">
+                 <h5>  Mon CV </h5> <span class="glyphicon glyphicon-briefcase"></span>
+              </button></a>
+             <br><br><small id="changeHelp" class="form-text text-muted"> Veuillez remplir les champs suivants afin d'enrichir votre CV: </small>
+            <?php
+//identifier le nom de base de données
+$db_handle = mysqli_connect("localhost","root", "");
+$db_found = mysqli_select_db($db_handle, "track");
+
+echo '<form method="post" =>
+  <div class="form-group">
+    <input type="text" class="form-control" name="formation" id="formation" placeholder="Formation">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="experience" id="experience" placeholder="Expérience">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="competences" id="competences" placeholder="Compétences">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="interets" id="interets" placeholder="Intérêts">
+  </div>
+     <button name="submit" type="submit" class="btn btn-default btn-sm btn-danger">
+                 <h5>  Confirmer </h5> 
+              </button>
+
+</form>';
+
+//on recupere les donnees saisie par l'utilisateur
+
+  $formation = isset($_POST["formation"])? $_POST["formation"]: ""; 
+  $experience = isset($_POST["experience"])? $_POST["experience"]: ""; 
+  $competences = isset($_POST["competences"])? $_POST["competences"]: ""; 
+  $interets = isset($_POST["interets"])? $_POST["interets"]: ""; 
+  
+
+if ($db_found)
+{
+  if(isset($_POST['submit'])){
+  
+      if( $formation=="" || $experience=="" || $competences=="" || $interets=="")
+       {
+        echo "Tous les champs ne sont pas rempli";
+       }
+
+      else
+      {$sql_modif= "UPDATE utilisateur SET formation='$formation', experience='$experience', competences='$competences', interets='$interets' WHERE pseudo='$pseudo'";
+        $result=mysqli_query($db_handle, $sql_modif);
+        //header('Location: profilCV.php');
+        
+      }
+  }
+
+}
+
+else
+{
+  echo "echec de connexion a la bdd"; 
+}
+
+?>   
+
+              <br><br> <p> <?php
 //identifier le nom de base de données
 $db_handle = mysqli_connect("localhost","root", "");
 $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
  if ($db_found) {
- $sql1 = "SELECT titre, compagnie ,description FROM emploi where id_offre='1'";
+ $sql1 = "SELECT formation, experience ,competences, interets  FROM utilisateur where pseudo='$pseudo'";
  $result1 = mysqli_query($db_handle, $sql1);
  while ($data1 = mysqli_fetch_assoc($result1)) {
- echo "Titre:" . $data1['titre'] . '<br>';
- echo "Compagnie: " . $data1['compagnie'] . '<br>';
- echo "Description: " . $data1['description'] . '<br>';
+ echo '<strong>' . "Formation: " .'</strong>'  . $data1['formation'] . '<br>';
+ echo '<strong>' . "Expérience: " .'</strong>'  . $data1['experience'] . '<br>';
+ echo '<strong>' . "Compétences: " .'</strong>'  . $data1['competences'] . '<br>';
+ echo '<strong>' . "Intérêts: " .'</strong>'  . $data1['interets'] . '<br>';
  }//end while 
  }//end if
 
@@ -128,95 +192,11 @@ $db_found = mysqli_select_db($db_handle, "track");
  }//end else
 //fermer la connection
 mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-               <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql2 = "SELECT titre, compagnie ,description FROM emploi where id_offre='2'";
- $result2 = mysqli_query($db_handle, $sql2);
- while ($data2 = mysqli_fetch_assoc($result2)) {
- echo "Titre:" . $data2['titre'] . '<br>';
- echo "Compagnie: " . $data2['compagnie'] . '<br>';
- echo "Description: " . $data2['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
+?>  </p>
           </div>
         </div>
       </div>
-      
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="well">
-                <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql3 = "SELECT titre, compagnie ,description FROM emploi where id_offre='3'";
- $result3 = mysqli_query($db_handle, $sql3);
- while ($data3 = mysqli_fetch_assoc($result3)) {
- echo "Titre:" . $data3['titre'] . '<br>';
- echo "Compagnie: " . $data3['compagnie'] . '<br>';
- echo "Description: " . $data3['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="well">
-            <p> <?php
-//identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
-$db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql4 = "SELECT titre, compagnie ,description FROM emploi where id_offre='4'";
- $result4 = mysqli_query($db_handle, $sql4);
- while ($data4 = mysqli_fetch_assoc($result4)) {
- echo "Titre:" . $data4['titre'] . '<br>';
- echo "Compagnie: " . $data4['compagnie'] . '<br>';
- echo "Description: " . $data4['description'] . '<br>';
- }//end while 
- }//end if
-
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p>
-          </div>
-        </div>
-      </div>
-      
+     
           
     </div>
    

@@ -37,13 +37,14 @@
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
       <ul class="nav navbar-nav">
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Mon réseau</a></li>
-        <li><a href="#">Emplois</a></li>
+        <li><a href="pageAccueil.php">Accueil</a></li>
+        <li><a href="reseau.php">Mon réseau</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
-        <li class="active"><a href="#">Vous</a></li>
-         <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
+        <li class="active"><a href="profilInfos.php">Vous</a></li>
+         <li><a href="profilModif.php">Modifier mon profil</a></li>
+        <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
        
       </ul>
@@ -74,15 +75,15 @@
         <div class="col-sm-12">
           <div class="well">
             <p> <h3> <strong>MON PROFIL</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-envelope"></span> Mes informations
-              </button>  
-            <button type="button" class="btn btn-default btn-sm btn-success">
-                <span class="glyphicon glyphicon-picture"></span> Mes photos
-              </button>
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-briefcase"></span> Mon CV
-              </button>
+             <a href="profilInfos.php"><button type="button" class="btn btn-default btn-sm">
+               <h5> Mes informations</h5>  <span class="glyphicon glyphicon-envelope"></span>
+              </button> </a>
+            <a href="profilPhotos.php"><button type="button" class="btn btn-default btn-sm btn-success">
+               <h5> Mes photos</h5>    <span class="glyphicon glyphicon-picture"></span> 
+              </button></a>
+            <a href="profilCV.php"><button type="button" class="btn btn-default btn-sm">
+                 <h5>  Mon CV </h5> <span class="glyphicon glyphicon-briefcase"></span>
+              </button></a>
              
               <br><br> <p>Photos</p>
           </div>

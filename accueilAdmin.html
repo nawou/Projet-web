@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TRACK</title>
+  <title>ACCUEIL ADMINISTRATEUR</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -63,7 +63,7 @@
       <div class="well">
         <p> <?php
 //identifier le nom de base de données
-$db_handle = mysqli_connect("localhost","root", "");
+$db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
  
  //si le BDD existe, faire le traitement
@@ -84,6 +84,12 @@ mysqli_close($db_handle);
 ?> </p>
         <img src="pp.png" class="img-circle" height="65" width="65" alt="Avatar">
       </div>  
+       <div class="row">
+          <button type="button" class="btn btn-default btn-sm btn-primary">
+          <h4>Gestion du site</h4>  <span class="glyphicon glyphicon-cog"></span>
+         </button>  
+
+        </div>
     </div>
 
 
@@ -92,8 +98,7 @@ mysqli_close($db_handle);
         <div class="col-sm-12">
           <div class="panel panel-default text-left">
             <div class="panel-body">
-            <form method="post">
-              <input id="textPost" placeholder="Post" type="text" name="textPost" /><br>
+              <p contenteditable="true">Partager un statut, une photo ou une vidéo</p>
               <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-picture"></span> Photo
               </button>  
@@ -101,11 +106,9 @@ mysqli_close($db_handle);
                 <span class="glyphicon glyphicon-facetime-video"></span> Video
               </button>   
               <div class="text-right">
-        
-              <button type="submit" id="publier" name ="publier" value= "post" class="btn btn-default btn-sm">
+              <button type="button" class="btn btn-default btn-sm">
                Publier
               </button> 
-        </form>
               </div>    
             </div>
           </div>
@@ -114,10 +117,12 @@ mysqli_close($db_handle);
 <?php
    if(isset($_POST['publier']))  
    {
-     $db_handle = mysqli_connect("localhost","root", "");
+echo "ma bite" ;
+     $db_handle = mysqli_connect("localhost","root", "root");
 $db_found = mysqli_select_db($db_handle, "track");
      
      $TEXTPOST = isset($_POST["textPost"])? $_POST["textPost"]:""; 
+     echo "textpost:".$TEXTPOST;
    $date=date("Y-m-d");
    $heure=date("H:i:s");
    
@@ -129,27 +134,18 @@ $db_found = mysqli_select_db($db_handle, "track");
        
        
      }
-   }
-  
-    
-    
-    
-    
+   }  
 ?>
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
-           <p><?php 
-            echo $data['prenom'] . " ". $data['nom'];
-            ?></p>
-           <img src="pp.png" class="img-circle" height="55" width="55" alt="Avatar">
+           <p>John</p>
+           <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
           </div>
         </div>
         <div class="col-sm-9">
           <div class="well">
-            <p><?php 
-            echo $TEXTPOST .'<br>' . $date . "  " . $heure;
-            ?></p>
+            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
             <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-thumbs-up"></span> J'aime
               </button>  

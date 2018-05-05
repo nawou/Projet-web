@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 04 mai 2018 à 16:13
+-- Généré le :  sam. 05 mai 2018 à 08:43
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -318,8 +318,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `id_publication` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `heure` time NOT NULL,
-  `lieu` varchar(50) NOT NULL,
-  `confidentialite` varchar(50) NOT NULL,
+  `test_publication` text,
   PRIMARY KEY (`id_publication`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -378,6 +377,10 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_experience` int(255) DEFAULT NULL,
   `id_interet` int(255) DEFAULT NULL,
   `id_competence` int(255) DEFAULT NULL,
+  `formation` text,
+  `experience` text,
+  `competences` text,
+  `interets` text,
   PRIMARY KEY (`pseudo`),
   KEY `id_formation` (`id_formation`),
   KEY `id_experience` (`id_experience`),
@@ -390,8 +393,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`) VALUES
-('sou97', 'maherzi', 'soufia', 'smaherzi@yahoo.fr', 'sou', '1997-03-10', 640464483, 'F', 'etudiant', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`, `formation`, `experience`, `competences`, `interets`) VALUES
+('sou97', 'maherzi', 'soufia', 'smaherzi@yahoo.fr', 'sou', '1997-03-10', 640464483, 'F', 'etudiant', 1, NULL, NULL, NULL, NULL, 'ING 3 ECE', 'STAGE', 'PHP', 'ne pas dormir');
 
 --
 -- Contraintes pour les tables déchargées

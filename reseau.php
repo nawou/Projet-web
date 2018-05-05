@@ -40,13 +40,14 @@
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
       <ul class="nav navbar-nav">
         <!-- Pour montrer qu'on est dans l'onglet accueil--> 
-        <li><a href="#">Accueil</a></li>
-        <li class="active"><a href="#">Mon réseau</a></li>
-        <li><a href="#">Emplois</a></li>
+        <li><a href="pageAccueil.php">Accueil</a></li>
+        <li class="active"><a href="reseau.php">Mon réseau</a></li>
+        <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
-        <li><a href="#">Vous</a></li>
-        <li><a href="#"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
+        <li><a href="profilInfos.php">Vous</a></li>
+         <li><a href="profilModif.php">Modifier mon profil</a></li>
+        <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
        
       </ul>

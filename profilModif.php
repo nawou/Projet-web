@@ -48,8 +48,8 @@
         <li><a href="emplois.php">Emplois</a></li>
         <li><a href="#">Messagerie</a></li>
         <li><a href="#">Notifications</a></li>
-        <li class="active"><a href="profilInfos.php">Vous</a></li>
-         <li><a href="profilModif.php">Modifier mon profil</a></li>
+        <li><a href="profilInfos.php">Vous</a></li>
+        <li class="active"><a href="profilModif.php">Modifier mon profil</a></li>
          <li><a href="page1test.php"><button type="button" class="btn btn-default btn-sm"> Déconnexion </button> </a><li>
         
        
@@ -63,7 +63,8 @@
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-          <p> <?php
+          <p> 
+          <?php
 //identifier le nom de base de données
 $db_handle = mysqli_connect("localhost","root", "");
 $db_found = mysqli_select_db($db_handle, "track");
@@ -101,43 +102,71 @@ mysqli_close($db_handle);
     
         <div class="col-sm-12">
           <div class="well">
-            <p> <h3> <strong>MON PROFIL</strong> <span class="glyphicon glyphicon-user"> </span></h3></p>
-            
-            <a href="profilInfos.php"><button type="button" class="btn btn-default btn-sm btn-success">
-               <h5> Mes informations</h5>  <span class="glyphicon glyphicon-envelope"></span>
-              </button> </a>
-            <a href="profilPhotos.php"><button type="button" class="btn btn-default btn-sm">
-               <h5> Mes photos</h5>    <span class="glyphicon glyphicon-picture"></span> 
-              </button></a>
-            <a href="profilCV.php"><button type="button" class="btn btn-default btn-sm">
-                 <h5>  Mon CV </h5> <span class="glyphicon glyphicon-briefcase"></span>
-              </button></a>
-
-             
-              <br> <br>  <p> <h4> <?php
+            <p> <h4> <strong>MODIFIER MON PROFIL</strong> <span class="glyphicon glyphicon-user"> </span></h4></p>
+            <small id="changeHelp" class="form-text text-muted"> Veuillez entrer les informations que vous souhaitez modifier et cliquer sur "confirmer": </small>
+<?php
 //identifier le nom de base de données
 $db_handle = mysqli_connect("localhost","root", "");
 $db_found = mysqli_select_db($db_handle, "track");
- 
- //si le BDD existe, faire le traitement
- if ($db_found) {
- $sql1 = "SELECT date_naissance, tel ,sexe, statut_pro  FROM utilisateur where pseudo='$pseudo'";
- $result1 = mysqli_query($db_handle, $sql1);
- while ($data1 = mysqli_fetch_assoc($result1)) {
- echo '<strong>' . "Date de naissance: " .'</strong>'  . $data1['date_naissance'] . '<br>';
- echo '<strong>' . "Téléphone: " .'</strong>'  . $data1['tel'] . '<br>';
- echo '<strong>' . "Sexe: " .'</strong>'  . $data1['sexe'] . '<br>';
- echo '<strong>' . "Statut professionnel: " .'</strong>'  . $data1['statut_pro'] . '<br>';
- }//end while 
- }//end if
 
-//si le BDD n'existe pas
- else {
- echo "Database not found";
- }//end else
-//fermer la connection
-mysqli_close($db_handle);
-?> </p> </h4>
+echo '<form method="post" =>
+  <div class="form-group">
+    <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Nouveau prénom">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="nom" name="nom" placeholder="Nouveau nom">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="numero" name="numero" placeholder="Nouveau numéro de téléphone">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="sexe" name="sexe" placeholder="Préciser votre sexe (par F ou M)">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="statut" name="statut" placeholder="Nouveau statut professionnel">
+  </div>
+    <button name="submit" type="submit" class="btn btn-default btn-sm btn-danger">
+                 <h5>  Confirmer </h5> 
+              </button>
+
+</form>';
+
+//on recupere les donnees saisie par l'utilisateur
+
+  $prenom = isset($_POST["prenom"])? $_POST["prenom"]: ""; 
+  $nom = isset($_POST["nom"])? $_POST["nom"]: ""; 
+  $numero = isset($_POST["numero"])? $_POST["numero"]: ""; 
+  $sexe = isset($_POST["sexe"])? $_POST["sexe"]: ""; 
+  $statut = isset($_POST["statut"])? $_POST["statut"]: ""; 
+
+if ($db_found)
+{
+  if(isset($_POST['submit'])){
+  
+      if( $prenom=="" || $nom=="" || $numero=="" || $sexe=="" || $statut=="")
+       {
+        echo "Tous les champs ne sont pas rempli";
+       }
+
+      else
+      {$sql_modif= "UPDATE utilisateur SET prenom='$prenom', nom='$nom', tel='$numero', sexe='$sexe', statut_pro='$statut' WHERE pseudo='$pseudo'";
+        $result=mysqli_query($db_handle, $sql_modif);
+        header('Location: profilInfos.php');
+        
+      }
+  }
+
+}
+
+else
+{
+  echo "echec de connexion a la bdd"; 
+}
+
+?>   
+
+             
+              <br> <br>  <p> <h4>  </p> </h4>
           </div>
         </div>
       </div>
