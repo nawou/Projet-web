@@ -55,7 +55,7 @@
 	 
 		 // On Verifie si il existe des utilisateurs avec ce nom/prenom
 		 
-		 $sql_post= "SELECT * FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='RECHERCHE'"; 
+		 $sql_post= "SELECT prenom, nom FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='RECHERCHE'"; 
 		 
 		 $result=mysqli_query($db_handle, $sql_post);
 		 // On verifie les champs rentre
@@ -63,12 +63,20 @@
 		 if ($data) // Si les champ identifiant n'est pas vide
 		 {
 			 echo "on a trouve ce pelo: " .$RECHERCHE;
+			 while ($data = mysqli_fetch_assoc($result)) {
+		echo "prenom: " . $data['prenom'] . '<br>';
+		echo "nom: " . $data['nom'] . '<br>';
 		}
+		 }
 		else
 		{
 			echo "On a trouvé personne";
 		}
-	 }
+		
+		
+ 
+ }
+	 
 	
 	
 	
@@ -168,7 +176,11 @@ $db_found = mysqli_select_db($db_handle, "track");
        
        
      }
-   }
+	 
+	 
+   
+}
+  
   
     
     
