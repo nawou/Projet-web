@@ -112,7 +112,7 @@ echo '<form method="post" =>
 //on recupere les donnees saisie par l'utilisateur
 
 	$PSEUDO = isset($_POST["pseudo"])? $_POST["pseudo"]: ""; 
-	$NAME = isset($_POST["name"])? $_POST["lastName"]: ""; 
+	$NAME = isset($_POST["name"])? $_POST["name"]: ""; 
 	$LASTNAME = isset($_POST["lastName"])? $_POST["lastName"]: ""; 
 	$BIRTH = isset($_POST["birth"])? $_POST["birth"]: ""; 
 	$EMAIL = isset($_POST["email"])? $_POST["email"]: ""; 
