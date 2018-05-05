@@ -26,18 +26,57 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-       <!-- Recherche -->
-       <form class="navbar-form navbar-left" role="search">
+      <!-- Recherche -->
+       <form class="navbar-form navbar-left" method="post">
         <div class="form-group input-group">
-          <input type="text" class="form-control" placeholder="Rechercher..">
+          <input type="text" class="form-control" placeholder="Rechercher.." name="navBar" id="navBar">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button class="btn btn-default" type="input" name="recherche" id="recherche">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>        
         </div>
       </form>
     </div>
+	<!-- Php pour la recherche-->
+	
+	<?php
+	
+	if(isset($_POST['recherche']))	 
+	 {
+		 // Connection a la bdd
+		 
+		 $db_handle = mysqli_connect("localhost","root", "");
+		 $db_found = mysqli_select_db($db_handle, "track");
+		 
+		 // On recupere la recherche saisie
+		 
+		 $RECHERCHE = isset($_POST["navBar"])? $_POST["navBar"]:""; 
+	 
+		 // On Verifie si il existe des utilisateurs avec ce nom/prenom
+		 
+		 $sql_post= "SELECT * FROM utilisateur WHERE prenom='$RECHERCHE' OR nom='RECHERCHE'"; 
+		 
+		 $result=mysqli_query($db_handle, $sql_post);
+		 // On verifie les champs rentre
+		 $data=mysqli_fetch_assoc($result);
+		 if ($data) // Si les champ identifiant n'est pas vide
+		 {
+			 echo "on a trouve ce pelo: " .$RECHERCHE;
+		}
+		else
+		{
+			echo "On a trouvé personne";
+		}
+	 }
+	
+	
+	
+	
+	
+	
+	
+	?>
     <!-- Barre de menu -->
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
       <ul class="nav navbar-nav">

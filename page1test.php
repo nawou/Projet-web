@@ -1,4 +1,5 @@
- 
+
+<!-- Fichier html --> 
 <html> 
 <title>TRACK</title>
 <meta charset="utf-8">
@@ -31,7 +32,7 @@ echo '<form method="post" >
 <div>
 ';
 
-$ID = isset($_POST["id"])? $_POST["id"]:""; ;
+$ID = isset($_POST["id"])? $_POST["id"]:"";
 $MDP = isset($_POST["mdp"])? $_POST["mdp"]: ""; 
 $db_handle = mysqli_connect("localhost","root", "");
 $db_found = mysqli_select_db($db_handle, "track");
@@ -141,7 +142,7 @@ else
 			 echo "test";	
 
 			 $sql= "INSERT INTO `utilisateur` (`pseudo`, `nom`, `prenom`, `email`, `mdp`, `date_naissance`, `tel`, `sexe`, `statut_pro`, `id_statut`, `id_formation`, `id_experience`, `id_interet`, `id_competence`)
-		 VALUES ('$PSEUDO','$LASTNAME','$NAME', '$EMAIL', '$PASSWORD','$BIRTH', 00000000, '', 'inconnu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)" ;
+		 VALUES ('$PSEUDO','$LASTNAME','$NAME', '$EMAIL', '$PASSWORD','$BIRTH', 00000000, '', 'inconnu', NULL, NULL, NULL, NULL, NULL)" ;
 		 
 		 mysqli_query($db_handle, $sql);
 		 }
